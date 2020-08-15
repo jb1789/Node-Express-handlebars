@@ -1,30 +1,32 @@
-// *********************************************************************************
-// CONNECTION.JS - THIS FILE INITIATES THE CONNECTION TO MYSQL
-// *********************************************************************************
+const mysql = require('mysql2/promise');
+// exports.connect = async () => {
+//     const connection = await mysql.createConnection({
+//         host: process.env.DB_HOST,
+//         port: process.env.DB_PORT,
+//         user: process.env.DB_USER,
+//         password: process.env.DB_PASS,
+//         database: process.env.DB_NAME
+//     });
+//     return connection;
+// }
+exports.connect = async () => {
+    var connection;
 
-// Require mysql
-var mysql = require("mysql");
-
-// Set up our connection information
-var connection;
-
+// process.env.JAWSDB_URL lets us plug in your connection details with just one object property. Since the JawsDB provision, Heroku saved the connection info in an environmental variable.
 if (process.env.JAWSDB_URL) {
-  connection = mysql.createConnection(process.env.JAWSDB_URL);
+    // If the server contains the JAWSDB_URL environmental variable, it connects to the JawsDB database.
+    connection = await mysql.createConnection(process.env.JAWSDB_URL);
 } else {
-  connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Number09!!",
-    database: "burgers_db"
-  });
+    // If the server lacks the variable, it falls back on an explicitly defined local database.
+    connection = await mysql.createConnection({
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME
+    });
 };
+    
+    return connection;
+}
 
-
-// Connect to the database
-connection.connect(function(err) {
-  if(err)throw err;
-  console.log("connected as id: " + connection.threadId);
-});
-
-// Export connection
-module.exports = connection;

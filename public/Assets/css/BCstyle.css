@@ -1,0 +1,106 @@
+
+     .jumbotron{
+       background-color: rgb(180, 213, 175);
+       box-shadow: 1px 1px 10px navy;
+       margin-top: 10px;
+    }
+    .card{
+        box-shadow: 1px 1px 10px navy;
+        background-color:rgb(218, 218, 218)
+        }
+    
+
+    *h1, h3{
+        font-family:'Dancing Script', cursive;
+        background-color: rgb(149, 244, 242);
+        color: Navy;
+        text-align: center;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        box-shadow: 1px 1px 10px navy;
+        font-size: 60px;
+        }
+    h3{
+        font-family:'Dancing Script', cursive;
+        width: 115%;
+        font-size: 35px;
+        color: rgb(0, 0, 34);
+    }
+    h2, h5{
+        font-family:'Dancing Script', cursive;
+        color: Navy;
+    }
+    #bottom{
+        background-color: rgb(215, 252, 252);
+        color: navy;
+    }
+    .card-deck{
+      height: 90%;
+      width: 119%;
+      text-align: center;
+      font-size: small;
+    }
+    */
+  
+     
+    h6, h5{
+        font-size: 12px;
+        color:navy;
+    }
+    .card-deck2{
+        height: 50%;
+        width: 80%;
+        text-align: center;
+        font-size: small;
+        margin-left: 55px;
+    }
+    #sidebar-wrapper{
+            background-color: rgb(149, 244, 242);
+            color: navy;
+        } 
+    .bigletter{
+            font-family:'Dancing Script', cursive;
+            width: 115%;
+            font-size: 35px;
+            color: rgb(0, 0, 34);
+        }
+
+
+.stars-outer {
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+  }
+  
+  .stars-outer::before {
+    content: "\f006 \f006 \f006 \f006 \f006";
+  }
+  
+  .stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+  }
+  
+  .stars-inner::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    color: #f8ce0b;
+  }
+  
+  .attribution {
+    font-size: 12px;
+    color: #444;
+    text-decoration: none;
+    text-align: center;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    z-index: -1;
+  }
+  .attribution:hover {
+    color: #1fa67a;
+  }
