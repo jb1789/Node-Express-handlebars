@@ -1,55 +1,61 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12 text-center" id="top-bar">
-      <h1>EAT DA BURGER</h1>
-    </div>
-
-    <div class="col-xs-6 text-center" id="task">
-      <div class="row">
-        <!--this loops through the burger data  -->
-        {{#each burger_data}}
-          {{#unless this.devoured}}
-        <div class="col-xs-9 text-center md-1">
-          <pre> {{this.id}}. {{this.burger_name}}</pre>
-        </div>
-      <div class="col-xs-9 text-center md-1">
-          <form method="POST" action="/burgers/update?_method=PUT"
-            class="button-size">
-            <input type="hidden" name="burger_id" type="text" value={{this.id}}>
-            <br>
-            <button type="submit" class="btn btn-success">DEVOUR IT!</button>
-          </form>
-      </div>
-        {{/unless}}
-      {{/each}}
-      </div>
-    </div>
-    <!--Add data to the database  -->
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-6 text-center enter_section">
-            <form action="/burgers/create" method="POST">
-              <input type="text" name="burger_name" class="form-control"
-              value="" id="enter_text">
-              <button type="submit" class="btn btn-warning" id="text-enter-button">SUBMIT</button>
-            </form>
-            <p>Enter in a burger you would like to eat!</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xs-6 text-center md-1" id="task">
-      {{#each burger_data}}
-        {{#if this.devoured}}
-          <input class="form-control" type="text" placeholder=
-            "{{this.id}}. {{this.burger_name}}" readonly>
-              {{/if}}
-            {{/each}}
-            <br>
-
-    </div>
-
-
-
+  <!--Jumbotron-->
+  <div class="jumbotron text-center bg-primary text-white">
+    <h1 class="display-4" id="app-title">Awesome Burger <img src="/assets/img/cheeseburger.png"></h1>
+    <p class="lead">Welcome to Awesome Burger. Home of the Awesome Burger.</p>
   </div>
-</div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card border border-primary">
+        <div class="card-header bg-primary text-white">
+         Can I take your order?
+        </div>
+        <!--Create/add burger form-->
+        <div class="card-body">
+          <form class="create-form">
+            <div class="form-group">
+              <label for="burger">Place order here:</label>
+              <input type="text" class="form-control" id="burgerToGo" placeholder="">
+            </div>
+            <button class="btn btn-primary" type="submit">Place order</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row mt-4">
+    <div class="col-md-6 mt-4">
+      <div class="card border border-primary">
+        <div class="card-header bg-primary text-white">
+         Burgers
+        </div>
+        <!--Div to hold burgers that have not been devoured yet-->
+        <div class="card-body">
+              {{#each burgers}}
+                {{#unless devoured}}
+                  {{> burgers/burger-block devour=false}}
+                {{/unless}}
+              {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mt-4">
+      <div class="card devoured-card">
+        <div class="card-header text-white" id="devoured-card-header">
+         Devoured burgers
+        </div>
+        <!--When a burger has been devoured, put burger here-->
+        <div class="card-body">
+          {{#each burgers}}
+              {{#if devoured}}
+                {{> burgers/burger-devoured devour=true}}
+              {{/if}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,21 +1,33 @@
-require('dotenv').config();
-const express = require("express");
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const routes = require('./routes');
+//Dependencies
+var express = require("express");
+var bodyParser = require("body-parser");
 
-const app = express();
-const PORT = process.env.PORT || 9000
+//Define port the server will be listening on.
+var PORT = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(express.urlencoded({extended: true}));
-app.use(express.static("./public/"));
+var app = express();
+
+//Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static(__dirname + '/public'));
+
+//Parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//Parse application/json
 app.use(bodyParser.json());
-routes.route(app);
-// ===========================================================
-app.get("/status", (req, res) => {
-  res.send("Welcome to the Burger App!");
-});
-app.listen(PORT, () => {
-  console.log("App listening on PORT " + PORT);
+
+//Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// Import routes and give the server access to them.
+var routes = require("./controllers/burgerController");
+
+app.use(routes);
+
+//App is listening...
+app.listen(PORT, function() {
+  console.log("App now listening at localhost:" + PORT);
 });
